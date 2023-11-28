@@ -40,7 +40,7 @@ func TestNew_KDTree(t *testing.T) {
 		return a.GetDimensionValue(dim) - b.GetDimensionValue(dim)
 	})
 
-	traverse(tree.Root, 0, func(node *Node[float64], depth int) {
+	tree.ForEach(func(node *Node[float64], depth int) {
 		dim := depth % node.Point.Dimensions()
 		if node.Left != nil && node.Left.Point.GetDimensionValue(dim) > node.Point.GetDimensionValue(dim) {
 			t.Errorf("expected left node to be less than %v, got %v", node.Point, node.Left.Point)
